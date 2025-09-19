@@ -65,13 +65,15 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<ImageData>>, response: Response<List<ImageData>>) {
                 if (response.isSuccessful) {
                     val image = response.body()
+                    Log.d("MAIN_ACTIVITY", "Image: $image")
                     val firstImage = image?.firstOrNull()?.imageUrl.orEmpty()
+                    val breedName = image?.firstOrNull()?.breeds?.firstOrNull()?.name ?: "Unknown"
                     if (firstImage.isNotBlank()) {
                         imageLoader.loadImage(firstImage, imageResultView)
                     } else {
                         Log.d(MAIN_ACTIVITY, "Missing image URL")
                     }
-                    apiResponseView.text = getString(R.string.image_placeholder, firstImage)
+                    apiResponseView.text = getString(R.string.image_placeholder, breedName)
                 } else {
                     Log.e(MAIN_ACTIVITY, "Failed to get response\n" + response.errorBody()?.string().orEmpty())
                 }

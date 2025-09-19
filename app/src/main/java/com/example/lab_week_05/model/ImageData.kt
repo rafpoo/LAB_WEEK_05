@@ -6,3 +6,22 @@ data class ImageData(
     @field:Json(name = "url") val imageUrl: String,
     val breeds: List<CatBreedData>
 )
+
+/*
+
+[
+    {
+        imageUrl: String,
+        breeds: [
+            {
+                name: String,
+                temperament: String,
+            }
+        ]
+    },
+    {
+        dst ...
+    }
+]
+
+ */
